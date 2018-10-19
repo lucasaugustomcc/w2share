@@ -113,21 +113,15 @@ where {
 <table>
 <thead>
 <tr>
-<th>abs</th>
-<th>process</th>
-<th>start</th>
-<th>end</th>
+<th>Variable</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><abs-workflow/Setup_MD/></td>
-	
-<td><abs-workflow/Setup_MD/processor/split/></td>
-	
-<td>"1644"^^xsd:Integer</td>
-	
-<td>"1786"^^xsd:Integer</td>
+<tr><td>abs</td><td><abs-workflow/Setup_MD/></td></tr>
+<tr><td>process</td><td><abs-workflow/Setup_MD/processor/split/></td></tr>
+<tr><td>start</td><td>"1644"^^xsd:Integer</td></tr>
+<tr><td>end</td><td>"1786"^^xsd:Integer</td></tr>
 </tr></tbody></table>
 
 **Query 5:** Retrieving metadata about the conversion process.
@@ -189,7 +183,7 @@ WHERE {
 <tr><td>output</td><td><data/4e0a1f-fc0f/output/blgc.pdb></td></tr>
 </tbody></table>
 
-*Query 7:* Retrieving the resources available in a WRO?
+**Query 7:** Retrieving the resources available in a WRO?
 
 ```sparql
 select distinct ?resource ?type
@@ -212,7 +206,7 @@ where {
 <tr><td><workflow/executable-workflow.t2flow></td><td>wf4ever:Workflow</td></tr>
 <tr><td><workflow/refined-workflow.t2flow></td><td>wf4ever:Workflow</td></tr>
 <tr><td><files/script.sh></td><td>wf4ever:Script</td></tr>
-<tr><td><workflowrun.prov.ttl></td><td>wfdesc:WorkflowRun</td></tr>
+<tr><td>&lt;workflowrun.prov.ttl&lt;/td&gt;</td><td>wfdesc:WorkflowRun</td></tr>
 <tr><td><data/4e0a1f-fc0f/input/structure.pdb></td><td>wf4ever:Dataset</td></tr>
 <tr><td><data/4e0a1f-fc0f/output/blgc.pdb></td><td>wf4ever:Dataset</td></tr>
 </tbody>
