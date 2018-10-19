@@ -122,7 +122,7 @@ where {
 <tr><td>process</td><td><abs-workflow/Setup_MD/processor/split/></td></tr>
 <tr><td>start</td><td>"1644"^^xsd:Integer</td></tr>
 <tr><td>end</td><td>"1786"^^xsd:Integer</td></tr>
-</tr></tbody></table>
+</tbody></table>
 
 **Query 5:** Retrieving metadata about the conversion process.
 
