@@ -1,0 +1,136 @@
+@prefix wf4ever: <http://purl.org/wf4ever/wf4ever#> .
+@prefix ore:   <http://www.openarchives.org/ore/terms/> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix tavernaprov: <http://ns.taverna.org.uk/2012/tavernaprov/> .
+@prefix oa:    <http://www.w3.org/ns/oa#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix wfprov: <http://purl.org/wf4ever/wfprov#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix wfdesc: <http://purl.org/wf4ever/wfdesc#> .
+@prefix ro:    <http://purl.org/wf4ever/ro#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+
+<https://w3id.org/w2share/wro/md-setup/run/e0fa2f25-0755/>
+        a                           wfprov:WorkflowRun ;
+        dcterms:hasPart             <https://w3id.org/w2share/wro/md-setup/run/e0fa2f25-0755/process/f0a0bd65-78d3/> , <https://w3id.org/w2share/wro/md-setup/run/e0fa2f25-0755/process/c06ff05e-eceb/> ;
+        wfprov:describedByWorkflow  <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/> ;
+        wfprov:usedInput            <https://w3id.org/w2share/wro/md-setup/data/5c65c151-0333/ref/61f8795e-e650> ;
+        <http://www.w3.org/ns/prov-o#endedAtTime>
+                "2016-06-16T11:25:24.549-03:00"^^xsd:dateTime ;
+        <http://www.w3.org/ns/prov-o#startedAtTime>
+                "2016-06-16T11:25:12.838-03:00"^^xsd:dateTime ;
+        <http://www.w3.org/ns/prov-o#used>
+                <https://w3id.org/w2share/wro/md-setup/data/5c65c151-0333/ref/61f8795e-e650> .
+
+<https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/>
+        a                     <http://www.w3.org/ns/prov-o#Entity> , wfdesc:Workflow ;
+        wfdesc:hasSubProcess  <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/processor/split/> ;
+        <http://www.w3.org/ns/prov-o#wasDerivedFrom>
+                <https://w3id.org/w2share/wro/md-setup/files/Setup_MD/script.sh> , <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/> .
+
+<https://w3id.org/w2share/wro/md-setup/data/5c65c151-0333/ref/61f8795e-e650>
+        a                            <http://www.w3.org/ns/prov-o#Entity> , wfprov:Artifact ;
+        tavernaprov:content          <https://w3id.org/w2share/wro/md-setup/data/4e0a1f-fc0f/input/structure.pdb> ;
+        wfprov:describedByParameter  <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/processor/split/in/initial_structure> , <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/processor/in/initial_structure> ;
+        <http://www.w3.org/ns/prov-o#wasGeneratedBy>
+                <https://w3id.org/w2share/wro/md-setup/run/4e0baa1f-fc0f/process/c3a0e8c0-dcb0/> .
+
+<https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/processor/split/>
+        <http://www.w3.org/ns/prov-o#wasDerivedFrom>
+                <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/> .
+
+<https://w3id.org/w2share/wro/md-setup/files/Setup_MD/script.sh>
+        a       wf4ever:Script , ro:Resource .
+
+<https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/>
+        a                     prov:Entity , wfdesc:Workflow ;
+        rdfs:label            "setup" ;
+        wfdesc:hasInput       <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/in/structure_pdb> ;
+        wfdesc:hasOutput      <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/out/fixed_1_pdb> ;
+        wfdesc:hasSubProcess  <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/> ;
+        <http://www.w3.org/ns/prov-o#wasAttributedTo>
+                [ a          <http://www.w3.org/ns/prov-o#Agent> ;
+                  foaf:name  "Lucas Carvalho"
+                ] ;
+        <http://www.w3.org/ns/prov-o#wasDerivedFrom>
+                <https://w3id.org/w2share/wro/md-setup/files/Setup_MD/script.sh> .
+
+<https://w3id.org/w2share/wro/md-setup/run/4e0baa1f-fc0f/process/c3a0e8c0-dcb0/>
+        a                            wfprov:ProcessRun ;
+        wfprov:describedByProcess    <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/processor/split/> ;
+        wfprov:usedInput             <https://w3id.org/w2share/wro/md-setup/data/5c65c151-0333/ref/61f8795e-e650> ;
+        wfprov:wasPartOfWorkflowRun  <https://w3id.org/w2share/wro/md-setup/run/e0fa2f25-0755/> ;
+        <http://www.w3.org/ns/prov-o#endedAtTime>
+                "2017-03-10T08:19:32.405-03:00"^^xsd:dateTime ;
+        <http://www.w3.org/ns/prov-o#startedAtTime>
+                "2017-03-10T08:19:31.075-03:00"^^xsd:dateTime ;
+        <http://www.w3.org/ns/prov-o#used>
+                <https://w3id.org/w2share/wro/md-setup/data/5c65c151-0333/ref/61f8795e-e650> .
+
+<https://w3id.org/w2share/wro/md-setup/data/e0fa2f25-0755/ref/55269975-380f>
+        a                            wfprov:Artifact , prov:Entity ;
+        tavernaprov:content          <https://w3id.org/w2share/wro/md-setup/data/4e0a1f-fc0f/output/bglc.pdb> ;
+        wfprov:describedByParameter  <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/processor/psgen/in/bglc_pdb> , <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/processor/split/out/bglc_pdb> ;
+        wfprov:wasOutputFrom         <https://w3id.org/w2share/wro/md-setup/run/4e0baa1f-fc0f/process/c3a0e8c0-dcb0/> ;
+        prov:wasGeneratedBy          <https://w3id.org/w2share/wro/md-setup/run/4e0baa1f-fc0f/process/c3a0e8c0-dcb0/> .
+
+<https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/>
+        a                 wfdesc:Process ;
+        rdfs:label        "split" ;
+        wfdesc:hasInput   <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/in/initial_structure> ;
+        wfdesc:hasOutput  <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/out/cbh1_pdb> ;
+        <http://www.w3.org/ns/prov-o#wasDerivedFrom>
+                [ a         oa:TextPositionSelector , <http://www.w3.org/ns/prov-o#Entity> ;
+                  oa:end    "1786"^^xsd:Integer ;
+                  oa:start  "1644"^^xsd:Integer
+                ] .
+
+<https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/variant>
+        a       <http://www.w3.org/ns/prov-o#Entity> , wfdesc:Workflow ;
+        <http://www.w3.org/ns/prov-o#wasDerivedFrom>
+                <https://w3id.org/w2share/wro/md-setup/workflow/Setup_MD/> .
+
+<https://w3id.org/w2share/wro/md-setup/workflow/executable-workflow.t2flow>
+        a       ro:Resource , wf4ever:Workflow .
+
+<https://w3id.org/w2share/wro/md-setup/workflow/refined-workflow.t2flow>
+        a       ro:Resource , wf4ever:Workflow .
+
+<https://w3id.org/w2share/wro/md-setup/data/4e0a1f-fc0f/input/structure.pdb>
+        a       ro:Resource , wf4ever:Dataset .
+
+<https://w3id.org/w2share/wro/md-setup/data/4e0a1f-fc0f/output/bglc.pdb>
+        a       ro:Resource , wf4ever:Dataset .
+
+<https://w3id.org/w2share/wro/md-setup/>
+        a               ro:ResearchObject ;
+        ore:aggregates  <https://w3id.org/w2share/wro/md-setup/files/Setup_MD/script.sh> , <https://w3id.org/w2share/wro/md-setup/workflow/executable-workflow.t2flow> , <https://w3id.org/w2share/wro/md-setup/workflow/refined-workflow.t2flow> , <https://w3id.org/w2share/wro/md-setup/data/4e0a1f-fc0f/input/structure.pdb> , <https://w3id.org/w2share/wro/md-setup/data/4e0a1f-fc0f/output/bglc.pdb> .
+
+<https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/out/fixed_1_pdb>
+        a              wfdesc:Input , wfdesc:Output ;
+        rdfs:label     "fixed_1" ;
+        dcterms:title  "coordinates for the whole system (cbh1.pdb), indicating which atoms should be kept fixed along the simulation" .
+
+<https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/in/initial_structure>
+        a              wfdesc:Input , wfdesc:Output ;
+        rdfs:label     "structure_pdb" ;
+        dcterms:title  "crystal structure of the protein" .
+
+<https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/datalink?from=in/initial_structure&to=processor/split/in/initial_structure>
+        a                 wfdesc:DataLink ;
+        wfdesc:hasSink    <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/in/initial_structure> ;
+        wfdesc:hasSource  <https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/in/initial_structure> .
+
+<https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/in/initial_structure>
+        a                    wfdesc:Input ;
+        rdfs:label           "structure_pdb" ;
+        dcterms:description  "crystal structure of the protein" .
+
+<https://w3id.org/w2share/wro/md-setup/abs-workflow/Setup_MD/processor/split/out/cbh1_pdb>
+        a                    wfdesc:Output ;
+        rdfs:label           "cbh1_pdb" ;
+        dcterms:description  "coordinates of the protein atoms" .
