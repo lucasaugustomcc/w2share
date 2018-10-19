@@ -18,14 +18,17 @@ prefix wfprov:  <http://purl.org/wf4ever/wfprov#>
 prefix foaf: <http://xmlns.com/foaf/0.1/>
 ```
 
-**Query 1:** Given a software function invoked in a workflow component implementation (e.g. *ex:weka.weka3.6.2-J48Modeler*), what is the software and software version of this function?
+**Query 1:** Retrieving information about abstract workflow Wa derived from S.
 
 ```sparql
-select ?sw ?swVersion where {
-	?swVersion rdf:type sw:SoftwareVersion ;
-		vff:hasSoftwareFunction ex:weka.weka3.6.2-J48Modeler .
-	?sw rdf:type sw:Software ;
-		sw:hasSoftwareVersion ?swVersion .
+select ?abs ?winput ?woutput ?process ?pinput ?poutput
+where { 
+   ?abs prov:wasDerivedFrom <files/Setup_MD/script.sh> ;
+      wfdesc:hasInput ?winput;
+      wfdesc:hasOutput ?woutput ;
+      wfdesc:hasSubProcess ?process .
+   ?process wfdesc:hasInput ?pinput;
+            wfdesc:hasOutput ?poutput .
 }
 ```
 
@@ -33,24 +36,27 @@ select ?sw ?swVersion where {
 <table>
 <thead>
 <tr>
-<th>sw</th>
-<th>swVersion</th>
+<th>Variable</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>ex:Weka</td>
-<td>ex:weka.weka3.6.2</td>
-</tr></tbody></table>
+<tr><td>abs</td><td><abs-workflow/Setup_MD></td></tr>
+<tr><td>winput</td><td><abs-workflow/Setup_MD/in/structure_pdb></td></tr>
+<tr><td>woutput</td><td><abs-workflow/Setup_MD/out/fixed_1_pdb></td></tr>
+<tr><td>processor</td><td><abs-workflow/Setup_MD/processor/split></td></tr>
+<tr><td>pinput</td><td><abs-workflow/Setup_MD/processor/split/in/initial_structure></td></tr>
+<tr><td>poutput</td><td><abs-workflow/Setup_MD/processor/split/out/cbh1_pdb></td></tr>
+</tbody>
+</table>
 
-**Query 2:** Are there any newer versions for a given function (e.g. *ex:weka.weka3.6.2-J48Classifier*)?
+**Query 2:**  Retrieving information about the executable Workflow derived from S.
 
 ```sparql
-select ?swVersionNew ?swFunctionNew where {
-	?swVersionNew rdf:type sw:SoftwareVersion ;
-		vff:hasSoftwareFunction ?swFunctionNew .
-	?swFunctionNew rdf:type vff:SoftwareFunction ;
-		prov:wasRevisionOf ex:weka.weka3.6.2-J48Classifier .
+select ?workflow 
+where { 
+   ?workflow a wfdesc:Workflow;
+         prov:wasDerivedFrom <files/Setup_MD/script.sh> .
 }
 ```
 
@@ -58,40 +64,21 @@ select ?swVersionNew ?swFunctionNew where {
 <table>
 <thead>
 <tr>
-<th>swVersionNew</th>
-<th>swFunctionNew</th>
+<th>Variable</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>ex:weka.weka3.9.2</td>
-<td>ex:weka.weka3.9.2-J48Classifier</td>
+<td>workflow</td><td><workflow/Setup_MD/></td>
 </tr></tbody></table>
 
-**Query 3:** What are the differences between two versions of a given software function?
-In this example, we compare the query results for *ex:weka.weka3.6.2-J48Classifier* and *ex:weka.weka3.9.2-J48Classifier*. We conclude that the function in both versions has the same inputs and outputs.
+**Query 3:** Retrieving information about workflow variants derived from We.
 
 ```sparql
-select ?inputFileName ?inputFileDataFormatName ?inputFileDataTypeName ?inputParameterName ?inputParameterDataTypeName ?outputName
-	?outputDataFormatName ?outputDataTypeName where {
-	ex:weka.weka3.6.2-J48Classifier rdf:type vff:SoftwareFunction ;
-		vff:hasInputFile ?inputFile ;
-        vff:hasInputParameter ?inputParameter ;
-		vff:hasOutput ?output .
-	?input vff:hasInputFileDataFormat ?inputFileDataFormat ;
-		vff:hasInputFileDataType ?inputFileDataType ;
-		vff:hasInputFileName ?inputFileName .
-    ?inputFileDataType rdfs:label ?inputFileDataTypeName .
-    ?inputFileDataFormat rdfs:label ?inputFileDataFormatName .
-    ?inputParameter 
-        vff:hasInputParameterDataType ?inputParameterDataType ;
-		vff:hasInputParameterName ?inputParameterName .
-    ?inputParameterDataType rdfs:label ?inputParameterDataTypeName .
-	?output vff:hasOutputDataFormat ?outputDataFormat ;
-		vff:hasOutputDataType ?outputDataType ;
-		vff:hasOutputName ?outputName .
-    ?outputDataType rdfs:label ?outputDataTypeName .
-    ?outputDataFormat rdfs:label ?outputDataFormatName .
+select ?variant 
+where { 
+   ?variant prov:wasDerivedFrom <workflow/Setup_MD/> .
 }
 ```
 
@@ -99,85 +86,22 @@ select ?inputFileName ?inputFileDataFormatName ?inputFileDataTypeName ?inputPara
 <table>
 <thead>
 <tr>
-<th>inputFileName</th>
-<th>inputFileDataFormatName</th>
-<th>inputFileDataTypeName</th>
-<th>inputParameterName</th>
-<th>inputParameterDataTypeName</th>
-<th>outputName</th>
-<th>outputDataFormatName</th>
-<th>outputDataTypeName</th>
+<th>Variable</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>"testFile"</td>
-<td>"ARFF"</td>
-<td>"Tabular"</td>
-<td>"classIndex"</td>
-<td>"String"</td>
-<td>"classification"</td>
-<td>"Java Object"</td>
-<td>"Text"</td>
+	<td>variant</td>
+	<td><workflow/Setup_MD/variant/></td>
 </tr></tbody></table>
-
-```sparql
-select ?inputFileName ?inputFileDataFormatName ?inputFileDataTypeName ?inputParameterName ?inputParameterDataTypeName ?outputName
-	?outputDataFormatName ?outputDataTypeName where {
-	ex:weka.weka3.9.2-J48Classifier rdf:type vff:SoftwareFunction ;
-		vff:hasInputFile ?inputFile ;
-        vff:hasInputParameter ?inputParameter ;
-		vff:hasOutput ?output .
-	?input vff:hasInputFileDataFormat ?inputFileDataFormat ;
-		vff:hasInputFileDataType ?inputFileDataType ;
-		vff:hasInputFileName ?inputFileName .
-    ?inputFileDataType rdfs:label ?inputFileDataTypeName .
-    ?inputFileDataFormat rdfs:label ?inputFileDataFormatName .
-    ?inputParameter 
-        vff:hasInputParameterDataType ?inputParameterDataType ;
-		vff:hasInputParameterName ?inputParameterName .
-    ?inputParameterDataType rdfs:label ?inputParameterDataTypeName .
-	?output vff:hasOutputDataFormat ?outputDataFormat ;
-		vff:hasOutputDataType ?outputDataType ;
-		vff:hasOutputName ?outputName .
-    ?outputDataType rdfs:label ?outputDataTypeName .
-    ?outputDataFormat rdfs:label ?outputDataFormatName .
-}
-```
-
-### Results
-<table>
-<thead>
-<tr>
-<th>inputFileName</th>
-<th>inputFileDataFormatName</th>
-<th>inputFileDataTypeName</th>
-<th>inputParameterName</th>
-<th>inputParameterDataTypeName</th>
-<th>outputName</th>
-<th>outputDataFormatName</th>
-<th>outputDataTypeName</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>"testFile"</td>
-<td>"ARFF"</td>
-<td>"Tabular"</td>
-<td>"classIndex"</td>
-<td>"String"</td>
-<td>"classification"</td>
-<td>"Java Object"</td>
-<td>"Text"</td>
-</tr></tbody></table>
-
 
 **Query 4:** Retrieving lineage information associating We and script elements.
 
 ```sparql
-select ?script ?abs ?process ?start ?end
+select ?abs ?process ?start ?end
 where { 
-   ?abs prov:wasDerivedFrom <> ;
+   ?abs prov:wasDerivedFrom <files/Setup_MD/script.sh> ;
       wfdesc:hasSubProcess ?process .
    ?process prov:wasDerivedFrom ?code .
    ?code oa:start ?start ;
@@ -189,12 +113,21 @@ where {
 <table>
 <thead>
 <tr>
-<th>swFunction</th>
+<th>abs</th>
+<th>process</th>
+<th>start</th>
+<th>end</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>"ex:weka.weka3.9.2-ID3Classifier"</td>
+<td><abs-workflow/Setup_MD/></td>
+	
+<td><abs-workflow/Setup_MD/processor/split/></td>
+	
+<td>"1644"^^xsd:Integer</td>
+	
+<td>"1786"^^xsd:Integer</td>
 </tr></tbody></table>
 
 **Query 5:** Retrieving metadata about the conversion process.
@@ -211,12 +144,13 @@ where {
 <table>
 <thead>
 <tr>
-<th>curator</th>
+<th>Variable</th>
+<th>Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>Lucas Carvalho</td>
+<th>curator</th><td>Lucas Carvalho</td>
 </tr>
 </tbody>
 </table>
@@ -238,6 +172,12 @@ WHERE {
 
 ### Results
 <table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
 <tbody>
 <tr>
 	<td>workflow</td><td><workflow/Setup_MD/></td></tr>
@@ -269,13 +209,11 @@ where {
 </tr>
 </thead>
 <tbody>
-<tr>
-	<td><workflow/executable-workflow.t2flow></td><td>wf4ever:Workflow</td>
-	<td><workflow/refined-workflow.t2flow></td><td>wf4ever:Workflow</td>
-	<td><files/script.sh></td><td>wf4ever:Script</td>
-	<td><workflowrun.prov.ttl></td><td>wfdesc:WorkflowRun</td>
-	<td><data/4e0a1f-fc0f/input/structure.pdb></td><td>wf4ever:Dataset</td>
-	<td><data/4e0a1f-fc0f/output/blgc.pdb></td><td>wf4ever:Dataset</td>
-</tr>
+<tr><td><workflow/executable-workflow.t2flow></td><td>wf4ever:Workflow</td></tr>
+<tr><td><workflow/refined-workflow.t2flow></td><td>wf4ever:Workflow</td></tr>
+<tr><td><files/script.sh></td><td>wf4ever:Script</td></tr>
+<tr><td><workflowrun.prov.ttl></td><td>wfdesc:WorkflowRun</td></tr>
+<tr><td><data/4e0a1f-fc0f/input/structure.pdb></td><td>wf4ever:Dataset</td></tr>
+<tr><td><data/4e0a1f-fc0f/output/blgc.pdb></td><td>wf4ever:Dataset</td></tr>
 </tbody>
 </table>
