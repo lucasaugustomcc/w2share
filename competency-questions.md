@@ -206,7 +206,6 @@ where {
 <tr><td><workflow/executable-workflow.t2flow></td><td>wf4ever:Workflow</td></tr>
 <tr><td><workflow/refined-workflow.t2flow></td><td>wf4ever:Workflow</td></tr>
 <tr><td><files/script.sh></td><td>wf4ever:Script</td></tr>
-<tr><td>&lt;workflowrun.prov.ttl&lt;/td&gt;</td><td>wfdesc:WorkflowRun</td></tr>
 <tr><td><data/4e0a1f-fc0f/input/structure.pdb></td><td>wf4ever:Dataset</td></tr>
 <tr><td><data/4e0a1f-fc0f/output/blgc.pdb></td><td>wf4ever:Dataset</td></tr>
 </tbody>
